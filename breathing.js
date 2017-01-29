@@ -66,9 +66,6 @@
 		}
 
 		var render = function() {
-			canvas.width = canvas.clientWidth;
-			canvas.height = canvas.clientHeight;
-			
 			ctx.save();
 			//clear canvas
 			ctx.fillStyle = 'white';
@@ -87,7 +84,14 @@
 			ctx.restore();
 		}
 
+		var updateCanvas = function(){
+			canvas.width = canvas.clientWidth;
+			canvas.height = canvas.clientHeight;
+		}
+
 		window.setInterval(update, 1 / fps);
+		window.addEventListener("resize",updateCanvas);
+		updateCanvas();
 	}
 
 	angular.module('app', ['ngMaterial']).controller('BreathCtrl', BreathCtrl);

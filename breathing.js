@@ -8,7 +8,7 @@
 		var timeConstant=1;
 		
 		var minHeight = 30;//min height of a lung
-		var maxHeight = 80;//max height of a lung
+		var maxHeight = 60;//max height of a lung
 		var currentHeight = minHeight;
 		//height of left lung for reference
 		var referenceHeight = minHeight;
@@ -21,7 +21,7 @@
 
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
-		var fps = 60;
+		var fps = 30;
 		var time = 0;
 
 		this.maxSide=function(){
@@ -80,7 +80,7 @@
 			ctx.lineWidth = (thickness*xp)/$scope.compliance;
 			ctx.fillStyle = 'pink';
 			var xMargin = (50-minWidth)*xp/2;
-			var yMargin = (canvas.height-(minHeight+(maxHeight-minHeight)*$scope.compliance)*yp)/2;
+			var yMargin = (canvas.height-(minHeight+(maxHeight-minHeight)*2)*yp)/2;
 			drawEllipse(xMargin, yMargin, minWidth * xp, currentHeight * yp);
 			ctx.lineWidth = thickness*xp;
 			drawEllipse(50*xp+xMargin, yMargin, minWidth * xp, referenceHeight * yp);

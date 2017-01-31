@@ -10,8 +10,8 @@
 
 		var minLungHeight = 30; //min height of a lung
 		var maxLungHeight = 60; //max height of a lung
-		var currentHeight = minLungHeight; //height of right lung (influenced by constants)
-		var referenceHeight = minLungHeight; //height of left lung for reference (all constansts are 1)
+		var currentHeight = minLungHeight; //height of left lung (influenced by constants)
+		var referenceHeight = minLungHeight; //height of right lung for reference (all constansts are 1)
 		var lungWidth = 30;
 		var thickness = 0.5;
 
@@ -144,8 +144,14 @@
 		}
 
 		window.setInterval(update, 1 / fps);
-		window.addEventListener("resize", updateCanvas);
-		updateCanvas();
+		window.addEventListener("resize", function(){
+			canvas.width=0;
+			canvas.height=0;
+		    //give dom time to update
+			window.setTimeout(updateCanvas,0.5);
+		});
+		//give dom time to update
+		window.setTimeout(updateCanvas,0.5);
 	}
 
 	angular.module('app', ['ngMaterial']).controller('BreathCtrl', BreathCtrl);

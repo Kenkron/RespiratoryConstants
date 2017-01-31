@@ -35,29 +35,28 @@
 </head>
 
 <body>
-	<div ng-controller="BreathCtrl as ctrl" style="height:90vh; max-width:90vh; margin:auto">
+	<div ng-controller="BreathCtrl as ctrl" style="height:95vh; max-width:95vh; margin:auto">
 		<div class="square">
-			<div class="fillSquare">
-				<div layout>
+			<div class="fillSquare" layout="column">
+				<div flex layout>
 					<div layout layout-align="center center">
 						<span class="md-body-1 slider-label">Resistance</span>
 					</div>
 					<md-slider flex aria-label="resistance" ng-model="ctrl.resistance" min="1" max="4" step="0.1" aria-label="resistance"></md-slider>
 					<input class="slider-input" type="number" ng-model="ctrl.resistance" aria-label="resistance" aria-controls="this.resistance">
 				</div>
-				<div layout>
+				<div flex layout>
 					<div layout layout-align="center center">
 						<span class="md-body-1 slider-label">Compliance</span>
 					</div>
 					<md-slider flex aria-label="resistance" ng-model="ctrl.compliance" min="0.25" max="2" step="0.01" aria-label="compliance"></md-slider>
 					<input class="slider-input" type="number" ng-model="ctrl.compliance" aria-label="compliance" aria-controls="this.compliance">
 				</div>
-				<div flex="100">
-					<canvas id="canvas" style="width:100%; height:100%;"></canvas>
-				</div>
+				<canvas flex="100" id="canvas"></canvas>
 			</div>
 		</div>
 	</div>
+
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>

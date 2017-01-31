@@ -1,8 +1,9 @@
 (function() {
-	BreathCtrl = function($scope) {
+	BreathCtrl = function() {
 		//Input variables
-		$scope.compliance = 1;
-		$scope.resistance = 1;
+		this.compliance = 1;
+		this.resistance = 1;
+		ctrl = this;
 
 		// variables
 		var timeConstant = 1;
@@ -24,7 +25,7 @@
 		}
 
 		var update = function() {
-			currentHeight = computeHeight(time, $scope.resistance, $scope.compliance);
+			currentHeight = computeHeight(time, ctrl.resistance, ctrl.compliance);
 			referenceHeight = computeHeight(time, 1, 1);
 			render();
 			time += 1.0 / fps;
@@ -71,7 +72,7 @@
 			ctx.strokeStyle = 'black';
 			var xp = canvas.width * 0.01;
 			var yp = canvas.height * 0.01;
-			ctx.lineWidth = (thickness * xp) / $scope.compliance;
+			ctx.lineWidth = (thickness * xp) / ctrl.compliance;
 			ctx.fillStyle = 'pink';
 			var xMargin = (50 - lungWidth) * xp / 2;
 			var yMargin = (canvas.height - (minLungHeight + (maxLungHeight - minLungHeight) * 2) * yp) / 2;

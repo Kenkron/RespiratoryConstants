@@ -13,7 +13,7 @@
 		var currentHeight = minLungHeight; //height of right lung (influenced by constants)
 		var referenceHeight = minLungHeight; //height of left lung for reference (all constansts are 1)
 		var lungWidth = 30;
-		var thickness = 1;
+		var thickness = 0.5;
 
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
@@ -56,11 +56,59 @@
 			return breath * (maxLungHeight - minLungHeight) + minLungHeight;
 		}
 
-		var drawEllipse = function(x, y, width, height) {
+		var drawLung = function(x, y, width, height) {
+			ctx.save();
 			ctx.beginPath();
 			ctx.ellipse(x + width / 2, y + height / 2, width / 2, height / 2, 0, 0, 2 * Math.PI)
 			ctx.fill();
 			ctx.stroke();
+			ctx.restore();
+		}
+
+		var strokeBronchiole = function(resistance, centerX, centerY, width, height, rotation){
+			var indent = (1-(1/resistance))*width/2;
+			var hw = width/2;
+			var hh = height/2;
+			ctx.save();
+			ctx.translate(centerX,centerY);
+			ctx.rotate(rotation);
+			ctx.moveTo(-hw,-hh);
+			//stroke
+			ctx.beginPath();
+			for (var i=0; i<2; i++){
+			    //left side, then right side
+				ctx.moveTo(-hw,-hh);
+				ctx.lineTo(-hw,-indent);
+				ctx.lineTo(indent-hw, 0);
+				ctx.lineTo(-hw,indent);
+				ctx.lineTo(-hw,hh);
+				ctx.rotate(Math.PI);
+			}
+			ctx.stroke();
+			ctx.restore();
+		}
+
+		var fillBronchiole = function(resistance, centerX, centerY, width, height, rotation){
+			var indent = (1-(1/resistance))*width/2;
+			var hw = width/2;
+			var hh = height/2;
+			ctx.save();
+			ctx.translate(centerX,centerY);
+			ctx.rotate(rotation);
+			ctx.moveTo(-hw,-hh);
+			//fill
+			ctx.beginPath();
+			for (var i=0; i<2; i++){
+			    //left side, then right side
+				ctx.lineTo(-hw,-hh);
+				ctx.lineTo(-hw,-indent);
+				ctx.lineTo(indent-hw, 0);
+				ctx.lineTo(-hw,indent);
+				ctx.lineTo(-hw,hh);
+				ctx.rotate(Math.PI);
+			}
+			ctx.fill();
+			ctx.restore();
 		}
 
 		var render = function() {
@@ -70,15 +118,23 @@
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			//draw lungs
 			ctx.strokeStyle = 'black';
+			ctx.fillStyle = 'pink';
 			var xp = canvas.width * 0.01;
 			var yp = canvas.height * 0.01;
-			ctx.lineWidth = (thickness * xp) / ctrl.compliance;
-			ctx.fillStyle = 'pink';
+			//stroke bronchiole
+			ctx.lineWidth = xp;
+			strokeBronchiole(ctrl.resistance, (23.8+lungWidth/2)*xp, (23-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
+			strokeBronchiole(1, (50+25+lungWidth/2)*xp, (23-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
+			//draw lungs
 			var xMargin = (50 - lungWidth) * xp / 2;
 			var yMargin = (canvas.height - (minLungHeight + (maxLungHeight - minLungHeight) * 2) * yp) / 2;
-			drawEllipse(xMargin, yMargin, lungWidth * xp, currentHeight * yp);
+			ctx.lineWidth = (thickness * xp) / ctrl.compliance;
+			drawLung(          xMargin, yMargin, lungWidth * xp, currentHeight * yp);
 			ctx.lineWidth = thickness * xp;
-			drawEllipse(50 * xp + xMargin, yMargin, lungWidth * xp, referenceHeight * yp);
+			drawLung(50 * xp + xMargin, yMargin, lungWidth * xp, referenceHeight * yp);
+			//stroke bronchiole
+			fillBronchiole(ctrl.resistance, (23.8+lungWidth/2)*xp, (23-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
+			fillBronchiole(1, (50+25+lungWidth/2)*xp, (23-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
 			ctx.restore();
 		}
 

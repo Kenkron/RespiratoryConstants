@@ -7,6 +7,7 @@
 
 		// variables
 		var timeConstant = 1;
+		var defaultCompliance = 3;
 
 		var minLungHeight = 30; //min height of a lung
 		var maxLungHeight = 60; //max height of a lung
@@ -18,17 +19,21 @@
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
 		var fps = 30;
-		var time = 0;
+		var time = new Date().getTime()/1000.0;
 
 		this.maxSide = function() {
 			return max(window.innerWidth(), window.innerHeight());
+		}
+
+		this.getTimeConstant=function(){
+			return this.resistance*this.compliance;
 		}
 
 		var update = function() {
 			currentHeight = computeHeight(time, ctrl.resistance, ctrl.compliance);
 			referenceHeight = computeHeight(time, 1, 1);
 			render();
-			time += 1.0 / fps;
+			time = new Date().getTime()/1000.0;
 		}
 
 		/**updates the current height of the lungs based on

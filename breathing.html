@@ -28,8 +28,9 @@
 		    right: 0;
 		}
 
-		.centred{
+		.centered{
 			margin: auto;
+			text-align: center;
 		}
 	</style>
 </head>
@@ -52,6 +53,12 @@
 					<md-slider flex aria-label="resistance" ng-model="ctrl.compliance" min="0.25" max="2" step="0.01" aria-label="compliance"></md-slider>
 					<input class="slider-input" type="number" ng-model="ctrl.compliance" aria-label="compliance" aria-controls="this.compliance">
 				</div>
+				<md-toolbar flex layout>
+					<div class="md-toolbar-tools" layout flex>
+					<div flex="50" class="centered">Time Constant: {{ctrl.getTimeConstant().toFixed(2)}} ({{(6/ctrl.getTimeConstant()).toFixed(2)}} Breaths/Minute)</div>
+					<div flex="50" class="centered">Time Constant: 1 (6 Breaths/Minute)</div>
+					</div>
+				</md-toolbar>
 				<canvas flex="100" id="canvas"></canvas>
 			</div>
 		</div>

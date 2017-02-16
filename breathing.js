@@ -9,11 +9,11 @@
 		var timeConstant = 1;
 		var defaultCompliance = 3;
 
-		var minLungHeight = 30; //min height of a lung
-		var maxLungHeight = 60; //max height of a lung
+		var minLungHeight = 45; //min height of a lung
+		var maxLungHeight = 65; //max height of a lung
 		var currentHeight = minLungHeight; //height of left lung (influenced by constants)
 		var referenceHeight = minLungHeight; //height of right lung for reference (all constansts are 1)
-		var lungWidth = 30;
+		var lungWidth = 25;
 		var thickness = 0.5;
 
 		var canvas = document.getElementById('canvas');
@@ -128,18 +128,18 @@
 			var yp = canvas.height * 0.01;
 			//stroke bronchiole
 			ctx.lineWidth = xp;
-			strokeBronchiole(ctrl.resistance, (23.8+lungWidth/2)*xp, (23-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
-			strokeBronchiole(1, (50+25+lungWidth/2)*xp, (23-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
+			strokeBronchiole(ctrl.resistance, (23.8+lungWidth/2)*xp, (40-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
+			strokeBronchiole(1, (50+25+lungWidth/2)*xp, (40-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
 			//draw lungs
 			var xMargin = (50 - lungWidth) * xp / 2;
 			var yMargin = (canvas.height - (minLungHeight + (maxLungHeight - minLungHeight) * 2) * yp) / 2;
 			ctx.lineWidth = (thickness * xp) / ctrl.compliance;
-			drawLung(          xMargin, yMargin, lungWidth * xp, currentHeight * yp);
+			drawLung(xMargin, yMargin, lungWidth * xp, currentHeight * yp);
 			ctx.lineWidth = thickness * xp;
 			drawLung(50 * xp + xMargin, yMargin, lungWidth * xp, referenceHeight * yp);
 			//stroke bronchiole
-			fillBronchiole(ctrl.resistance, (23.8+lungWidth/2)*xp, (23-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
-			fillBronchiole(1, (50+25+lungWidth/2)*xp, (23-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
+			fillBronchiole(ctrl.resistance, (23.8+lungWidth/2)*xp, (40-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
+			fillBronchiole(1, (50+25+lungWidth/2)*xp, (40-minLungHeight/2)*yp ,5*xp,15*xp, Math.PI/3);
 			ctx.restore();
 		}
 

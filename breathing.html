@@ -13,19 +13,32 @@
 			margin-left: 1em;
 		}
 
-		.square {
-			position:relative;
+		.frame4x3 {
 			width: 100%;
-			padding-top: 100%;
+			padding-top: 75%;
+			position: relative;
 		}
 
-		.fillSquare {
-			max-width: 100%;
-			position: absolute;
-		    top: 0;
-		    left: 0;
-		    bottom: 0;
-		    right: 0;
+		.frame-golden {
+			width: 100%;
+			padding-top: 61.8%;
+			position: relative;
+		}
+
+		.frame16x9 {
+			width: 100%;
+			padding-top: 56.25%;
+			position: relative;
+		}
+
+		.fill-frame {
+			position:  absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			width: 100%;
+			height: 100%;
 		}
 
 		.centered{
@@ -36,33 +49,43 @@
 </head>
 
 <body>
-	<div ng-controller="BreathCtrl as ctrl" style="height:95vh; max-width:95vh; margin:auto">
-		<div class="square">
-			<div class="fillSquare" layout="column">
-				<div flex layout>
+	<div ng-controller="BreathCtrl as ctrl" style="height:95vh;max-width: 162vh" layout="column" layout-gt-sm="row" class="centered">
+		<div flex-gt-sm="25" style="min-width: 350pt" layout-padding>
+			<a href="https://www.samford.edu/healthprofessions/cardiopulmonary-sciences" style="display:block" layout-padding>
+				<div md-whiteframe="2dp">
+					<img src="Samford_Cardiopulmonary-Sciences.png" style="height: 100pt"/>
+				</div>
+			</a>
+			<h2>Time Constant Demonstration</h2>
+		</div>
+		<div id="interactive container" layout="column" flex="75" style="max-width: 120vh">
+			<div>
+				<div layout>
 					<div layout layout-align="center center">
 						<span class="md-body-1 slider-label">Resistance</span>
 					</div>
 					<md-slider flex aria-label="resistance" ng-model="ctrl.resistance" min="1" max="4" step="0.1" aria-label="resistance"></md-slider>
 					<input class="slider-input" type="number" ng-model="ctrl.resistance" aria-label="resistance" aria-controls="this.resistance">
 				</div>
-				<div flex layout>
+				<div layout>
 					<div layout layout-align="center center">
 						<span class="md-body-1 slider-label">Compliance</span>
 					</div>
 					<md-slider flex aria-label="resistance" ng-model="ctrl.compliance" min="0.25" max="2" step="0.01" aria-label="compliance"></md-slider>
 					<input class="slider-input" type="number" ng-model="ctrl.compliance" aria-label="compliance" aria-controls="this.compliance">
 				</div>
-				<md-toolbar flex layout>
+				<md-toolbar layout>
 					<div class="md-toolbar-tools" layout flex>
-					<div flex="50" class="centered">Time Constant: {{ctrl.getTimeConstant().toFixed(2)}} ({{(6/ctrl.getTimeConstant()).toFixed(2)}} Breaths/Minute)</div>
-					<div flex="50" class="centered">Time Constant: 1 (6 Breaths/Minute)</div>
+						<div flex="50" class="centered">Time Constant: {{ctrl.getTimeConstant().toFixed(2)}} <br/> {{(6/ctrl.getTimeConstant()).toFixed(2)}} Breaths/Minute</div>
+						<div flex="50" class="centered">Time Constant: 1 <br/> 6 Breaths/Minute</div>
 					</div>
 				</md-toolbar>
-				<canvas flex="100" id="canvas"></canvas>
+				<div class="frame-golden">
+					<canvas class="fill-frame" id="canvas"></canvas>
+				</div>
 			</div>
 		</div>
-	</div>
+	<div>
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>

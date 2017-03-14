@@ -71,13 +71,13 @@
 					<div layout layout-align="center center">
 						<span class="md-body-1 slider-label">Compliance</span>
 					</div>
-					<md-slider flex aria-label="resistance" ng-model="ctrl.compliance" min="0.25" max="2" step="0.01" aria-label="compliance"></md-slider>
+					<md-slider flex aria-label="resistance" ng-model="ctrl.compliance" min="0.04" max="1" step="0.01" aria-label="compliance"></md-slider>
 					<input class="slider-input" type="number" ng-model="ctrl.compliance" aria-label="compliance" aria-controls="this.compliance">
 				</div>
 				<md-toolbar layout>
 					<div class="md-toolbar-tools" layout flex>
 						<div flex="50" class="centered">Time Constant: {{ctrl.getTimeConstant().toFixed(2)}} <br/> {{(6/ctrl.getTimeConstant()).toFixed(2)}} Breaths/Minute</div>
-						<div flex="50" class="centered">Time Constant: 1 <br/> 6 Breaths/Minute</div>
+						<div flex="50" class="centered">Time Constant: {{ctrl.getDefaultTimeConstant().toFixed(2)}} <br/> {{(6/ctrl.getDefaultTimeConstant()).toFixed(2)}} Breaths/Minute</div>
 					</div>
 				</md-toolbar>
 				<div class="frame-golden">

@@ -23,8 +23,8 @@
 		//*actually* rectangular prisms, and the depth is not depicted.
 
 		//Constants
-		var tidalVolume = 500; //volume change (ml)
-		var residualCapacity = 2300; //volume at rest (ml)
+		var tidalVolume = 600; //volume change (ml)
+		var residualCapacity = 2000; //volume at rest (ml)
 		var residualHeight = 21; //min height of a lung (cm)
 		var residualWidth = 12; //min width of a lung (cm)
 		var HORIZONTAL_EXPANSION = 0.2; //as a factor of vertical expansion
@@ -201,8 +201,8 @@
 			ctx.scale(scale, scale);
 			var xp = canvas.width * 0.01 / scale;
 			var yp = canvas.height * 0.01 / scale;
-			drawLung(25 * xp, 40 * yp, currentVolume, ctrl.compliance, ctrl.resistance);
-			drawLung(75 * xp, 40 * yp, referenceVolume, DEFAULT_COMPLIANCE, DEFAULT_RESISTANCE);
+			drawLung(25 * xp, 40 * yp, currentVolume, Math.sqrt(DEFAULT_COMPLIANCE/(4*ctrl.compliance)), ctrl.resistance);
+			drawLung(75 * xp, 40 * yp, referenceVolume, Math.sqrt(DEFAULT_COMPLIANCE/(4*DEFAULT_COMPLIANCE)), DEFAULT_RESISTANCE);
 			ctx.restore();
 		}
 
